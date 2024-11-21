@@ -1,11 +1,19 @@
-# Ejercicio 3 - Depliegue de Minikube y Jenkins en AWS
+## Ejercicio 3 - Depliegue de Minikube y Jenkins en AWS
 Necesitaremos un minikube para administrar contenedores en la nube de AWS, para esto el equipo estaba pensando posibilidades de tipos
 de instancias para poder administrar la carga de trabajo de minikube.
 Una vez realizado vamos a necesitar desplegar un jenkins (en el mismo minikube o en una instancia diferente) y que este para poder
 interactuar con el cluster.
 Tambien opcionalmente necesitamos exponer el dashboard de recursos de Kubernetes, esto para poder observar las cargas y metricas.
 
-# RESUMEN :
+## Como deployar.
+```bash
+minikube start
+kubectl apply -f .
+kubectl port-forward svc/jenkins 30000:30000 --address 0.0.0.0 &
+minikube dashboard ( para levantar el dashboard )
+```
+
+## RESUMEN :
 - Crear una ec2 , la clave ssh y el sg.
 - instalar docker
 - instalar minikube y kubectl.
@@ -13,8 +21,9 @@ Tambien opcionalmente necesitamos exponer el dashboard de recursos de Kubernetes
 - exponer el puerto para poder acceder publicamente a jenkins.
 - instalacion del dashboard de k8s (acceso local).
 
-# Proceso
 
+
+## Proceso
 ## Ec2 y Requerimentos de minikube.
 
 * En el proceso de levantar la ec2 , levante primero una t2.micro.
@@ -82,9 +91,6 @@ Vi dos maneras de hacerlo ( con los yaml o con comandos con argumentos)
 ### dashboard de kubernetes.(no lo expuse publicamente)
 Este comando te permite ingresar al dashboard de kubernetes atraves del navegador.  
 minikube dashboard
-
-
-
 
 
 ## Problemas inesperados : 
